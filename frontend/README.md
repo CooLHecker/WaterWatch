@@ -54,19 +54,7 @@ npm run build      # type-checks then builds to dist/
 npm run preview    # serve the production build locally
 ```
 
-## Deploying to Vercel
 
-This is a standard Vite app — Vercel autodetects it:
-
-1. Push this repo to GitHub.
-2. Import it in Vercel ("Add New Project").
-3. Framework preset: **Vite**. Build command `npm run build`, output directory `dist`
-   (Vercel fills these in automatically).
-4. Deploy.
-
-Set `VITE_API_BASE_URL` (Vercel → this project → Settings → Environment Variables) to
-the deployed backend's URL — see `../backend/README.md` — to enable live rainfall.
-Leave it unset to keep using mock data for local dev without the backend running.
 
 ## Wiring up a real backend later
 
