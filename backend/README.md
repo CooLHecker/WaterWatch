@@ -53,35 +53,5 @@ Both are called out in detail in the docstring at the top of
 `api/imerg.py`. If something's off, that file is the only one you
 should need to touch.
 
-## Deploying to Vercel
-
-This repo has the frontend and backend as separate Vercel projects
-pointing at different Root Directories in the same GitHub repo:
-
-1. In Vercel, **Add New Project** → import the same repo again (a
-   second project, separate from the frontend one).
-2. Set **Root Directory** to `backend`.
-3. Framework Preset: **Other** (this is a plain `@vercel/python`
-   function, not a framework Vercel auto-detects).
-4. Add Environment Variables (Settings → Environment Variables):
-   - `EARTHDATA_TOKEN` — your NASA Earthdata Login bearer token.
-   - `FRONTEND_ORIGINS` — your frontend's deployed URL, e.g.
-     `https://your-frontend.vercel.app,http://localhost:5173`
-   - Leave `RAINFALL_CACHE_TTL_SECONDS` / `IMERG_COLLECTION` /
-     `IMERG_BASE_URL` unset unless you need to override the defaults.
-5. Deploy. Test `https://your-backend.vercel.app/api/rainfall/debug`
-   first, then `/api/rainfall/current`.
-
-**Rotate the Earthdata token before or right after this**, since it was
-shared in plaintext in chat — generate a fresh one at
-https://urs.earthdata.nasa.gov (Applications → Earthdata Login →
-Generate Token) and use that instead.
-
-## Wiring the frontend to this
-
-In the frontend project, set `VITE_API_BASE_URL` to this backend's
-deployed URL (Vercel → frontend project → Settings → Environment
-Variables). `src/data/api.ts`'s `getWardTelemetry()` now calls this
-endpoint when that variable is set, and falls back to local mock data
-otherwise — so local frontend dev still works without the backend
+ local frontend dev still works without the backend
 running.
